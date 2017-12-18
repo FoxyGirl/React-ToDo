@@ -1,0 +1,31 @@
+.note {
+    position: relative;    
+    margin-bottom: 10px;
+    background-color: #fff;
+
+    &:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+        .note__del {
+            display: block;
+        }
+    }
+
+    &.note--done {
+        text-decoration: line-through;
+    }
+
+    label {
+        display: block;
+        padding: 10px;
+    }
+
+    &__del {
+        position: absolute;
+        top:5px;
+        right:5px;
+        display: none;
+        color: rgba(0,0,0,0.6);
+        cursor: pointer;  
+    }
+}
