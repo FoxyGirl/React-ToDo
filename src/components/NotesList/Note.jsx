@@ -4,9 +4,6 @@ import React from 'react';
 import './Note.less';
 
 class Note extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const entryClass = this.props.isDone ? 'note note--done' : 'note';
