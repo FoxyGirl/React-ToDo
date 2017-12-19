@@ -5,6 +5,7 @@ import NoteEditor from './components/NoteEditor/NoteEditor.jsx';
 import ProgressBar from './components/ProgressBar/ProgressBar.jsx';
 import NotesList from './components/NotesList/NotesList.jsx';
 import FilterList from './components/FilterList/FilterList.jsx';
+import Cleaner from './components/Cleaner/Cleaner.jsx';
 
 import './ToDoApp.less';
 
@@ -24,6 +25,7 @@ export default class TodoApp extends React.Component {
         this.handleNoteDelete = this.handleNoteDelete.bind(this);
         this.hadleNoteDone = this.hadleNoteDone.bind(this);
         this.handleNoteFilter = this.handleNoteFilter.bind(this);
+        this.hadleDoneClean = this.hadleDoneClean.bind(this);
     }
 
     componentDidMount() {
@@ -64,6 +66,13 @@ export default class TodoApp extends React.Component {
         }
         });
         this.setState({notes: newNotes, displayedNotes: newNotes});
+    }
+
+    hadleDoneClean() {
+        const newNotes = this.state.notes.slice();
+        const notesNotDone = newNotes.filter(note => note.isDone === false);
+        console.log(`notesNotDone = ${notesNotDone}`);
+        this.setState({ notes: notesNotDone, displayedNotes: notesNotDone });
     }
 
     handleNoteFilter(filter) {
@@ -119,11 +128,13 @@ export default class TodoApp extends React.Component {
                             onNoteDone={this.hadleNoteDone} />
                         <FilterList 
                           filters={this.state.filters}
-                          onNoteFilter={this.handleNoteFilter} /> 
+                          onNoteFilter={this.handleNoteFilter} />
+                        { doneItems.length > 0 
+                            && <Cleaner onDoneClean={this.hadleDoneClean}/> } 
                     </div>
                 ) : (
                     <div className="not-found">Nothing is here!</div>
-                )}
+                )}     
             </div>
         );
     }

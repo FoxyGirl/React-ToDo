@@ -18,11 +18,9 @@ class ProgressBar extends React.Component {
                 </div>
                 <div className="progress-bar__footer"> 
                     {
-                        notDoneItem !== 0 ? (
-                            <p className="progress-bar__text">You need to do {notDoneItem} {activeWord}</p>
-                        ) : (
-                             <p className="progress-bar__text  progress-bar__text--success">Congratulations! You have done all!</p>
-                        )
+                        notDoneItem !== 0 
+                        ? <p className="progress-bar__text">You need to do {notDoneItem} {activeWord}</p>
+                        : <p className="progress-bar__text  progress-bar__text--success">Congratulations! You have done all!</p>
                     }                     
                 </div>
           </div>
