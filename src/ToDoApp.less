@@ -1,8 +1,10 @@
 * {
-    box-sizing: border-box;
+    box-sizing: inherit;
 }
 
 body {
+    min-width: 320px;
+    box-sizing: border-box;
     font-family: Tahoma, sans-serif;
     font-weight: 300;
     background-color: #eaeaea;
@@ -27,6 +29,7 @@ body {
 .notes-app {
     max-width: 960px;
     width: 100%;
+    padding: 0 20px;
 }
 
 .app-header {
@@ -40,4 +43,17 @@ body {
     font-weight: bold;
     color: darkred;
     text-align: center;
+}
+
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 600px;
+    margin: 50px auto;   
+    
+     @media (max-width: 540px) {
+         flex-direction: column;
+     }
 }

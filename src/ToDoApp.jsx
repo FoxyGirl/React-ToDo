@@ -126,11 +126,13 @@ export default class TodoApp extends React.Component {
                             notes={this.state.displayedNotes}
                             onNoteDelete={this.handleNoteDelete} 
                             onNoteDone={this.hadleNoteDone} />
-                        <FilterList 
-                          filters={this.state.filters}
-                          onNoteFilter={this.handleNoteFilter} />
-                        { doneItems.length > 0 
-                            && <Cleaner onDoneClean={this.hadleDoneClean}/> } 
+                        <footer className="app-footer"> 
+                            <FilterList 
+                                filters={this.state.filters}
+                                onNoteFilter={this.handleNoteFilter} />
+                                { doneItems.length > 0 
+                                    && <Cleaner onDoneClean={this.hadleDoneClean}/> }   
+                        </footer>                         
                     </div>
                 ) : (
                     <div className="not-found">Nothing is here!</div>
