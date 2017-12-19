@@ -36,7 +36,7 @@ class NoteEditor extends React.Component {
         return (
             <div className="note-editor">
                 <textarea
-                    placeholder="Enter your point to be done here..."
+                    placeholder="Enter your new task here..."
                     rows={1}
                     className="textarea"
                     value={this.state.text}

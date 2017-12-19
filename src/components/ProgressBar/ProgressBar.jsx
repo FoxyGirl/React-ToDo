@@ -8,6 +8,7 @@ class ProgressBar extends React.Component {
         const percent = Math.round(this.props.itemsDoneCount / this.props.itemsCount * 100)
         const barStyle = {width: `${percent}%`};
         const notDoneItem = this.props.itemsCount - this.props.itemsDoneCount;
+        const activeWord = notDoneItem!== 1 ? 'tasks' : 'task';
 
         return (
             <div className="progress-bar">
@@ -17,13 +18,12 @@ class ProgressBar extends React.Component {
                 </div>
                 <div className="progress-bar__footer"> 
                     {
-                         notDoneItem !== 0 ? (
-                             <p>You need to do {notDoneItem} items</p>
-                         ) : (
-                             <p>You have done all</p>
-                             )
-                    }
-                     
+                        notDoneItem !== 0 ? (
+                            <p className="progress-bar__text">You need to do {notDoneItem} {activeWord}</p>
+                        ) : (
+                             <p className="progress-bar__text  progress-bar__text--success">Congratulations! You have done all!</p>
+                        )
+                    }                     
                 </div>
           </div>
         );
