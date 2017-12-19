@@ -6,12 +6,11 @@ import './Note.less';
 class Note extends React.Component {
 
     render() {
-        const entryClass = this.props.isDone ? 'note note--done' : 'note';
 
         return (
-          <li className={entryClass}>
-              <span className="note__del" onClick={this.props.onDelete}>x</span>
-              <label>
+          <li className={this.props.isDone ? 'note note--done' : 'note'}>
+              <span className="note__del" onClick={this.props.onDelete}>×</span>
+              <label onDoubleClick={() =>  console.log(this.props.isDone)}>
                 <input  type="checkbox" 
                         checked={this.props.isDone}
                         onChange={this.props.onDone} />
