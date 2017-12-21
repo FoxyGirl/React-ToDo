@@ -9,6 +9,8 @@ class NotesList extends React.Component {
     render() {
         const onNoteDelete = this.props.onNoteDelete;
         const onNoteDone = this.props.onNoteDone;
+        const onNoteChange = this.props.onNoteChange;
+
         
         return (
             <ul className="notes-list" >
@@ -18,7 +20,9 @@ class NotesList extends React.Component {
                             key={note.id}
                             onDelete={onNoteDelete.bind(null, note)}
                             onDone={onNoteDone.bind(null, note)}
-                            isDone={note.isDone}>
+                            onNoteChange={onNoteChange.bind(null, note)}
+                            isDone={note.isDone}
+                            noteId={note.id} >
                             {note.text}
                         </Note>;
                     })

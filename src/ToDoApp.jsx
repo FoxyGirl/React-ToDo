@@ -26,11 +26,11 @@ export default class TodoApp extends React.Component {
         this.hadleNoteDone = this.hadleNoteDone.bind(this);
         this.handleNoteFilter = this.handleNoteFilter.bind(this);
         this.hadleDoneClean = this.hadleDoneClean.bind(this);
+        this.handleNoteChange = this.handleNoteChange.bind(this);
     }
 
     componentDidMount() {
         const localNotes = JSON.parse(localStorage.getItem('toDoNotes'));
-        console.log('localNotes = ' + localNotes);
 
         if (localNotes) {
         this.setState({notes: localNotes, displayedNotes: localNotes});
@@ -44,7 +44,6 @@ export default class TodoApp extends React.Component {
     }
 
     handleNoteAdd(newNote) {
-        console.log('handleNoteAdd in APP ' + newNote.text);
         const newNotes = this.state.notes.slice();
         newNotes.unshift(newNote);
         this.setState({ notes: newNotes, displayedNotes: newNotes});
@@ -57,13 +56,27 @@ export default class TodoApp extends React.Component {
         this.setState({notes: newNotes, displayedNotes: newNotes});
     }
 
+    handleNoteChange(note, noteId, newText) {
+      /* console.log(`handleNoteChange text = ${newText}
+       noteId = ${JSON.stringify(noteId)}`); */
+
+        const changedNotes = this.state.notes.slice();
+        changedNotes.map( note => {
+            if ( note.id === noteId ) {
+                note.text = newText;
+            }
+        })
+
+        this.setState({notes: changedNotes, displayedNotes: changedNotes});
+    }
+
     hadleNoteDone(note) {
         const noteId = note.id;
         const newNotes = this.state.notes.slice();
         newNotes.map( note => {
-        if (note.id === noteId) {
-            note.isDone = !note.isDone;
-        }
+            if (note.id === noteId) {
+                note.isDone = !note.isDone;
+            }
         });
         this.setState({notes: newNotes, displayedNotes: newNotes});
     }
@@ -71,7 +84,6 @@ export default class TodoApp extends React.Component {
     hadleDoneClean() {
         const newNotes = this.state.notes.slice();
         const notesNotDone = newNotes.filter(note => note.isDone === false);
-        console.log(`notesNotDone = ${notesNotDone}`);
         this.setState({ notes: notesNotDone, displayedNotes: notesNotDone });
     }
 
@@ -125,6 +137,7 @@ export default class TodoApp extends React.Component {
                         <NotesList 
                             notes={this.state.displayedNotes}
                             onNoteDelete={this.handleNoteDelete} 
+                            onNoteChange={this.handleNoteChange}
                             onNoteDone={this.hadleNoteDone} />
                         <footer className="app-footer"> 
                             <FilterList 

@@ -1,16 +1,14 @@
 .note {
     position: relative;    
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     background-color: #fff;
 
     &:hover {
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 
-        .note__del {
-            display: block;
-            color: darkred;
-            font-size: 20px;
-            font-weight: bold;
+        .note__del,
+        .note__edit {
+            display: block;            
         }
     }
 
@@ -18,6 +16,25 @@
         text-decoration: line-through;
     }
     
+    &.note--edit {
+
+        &::after {
+            content: '';
+            display: block;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            background-color: rgba(0,0,0,0.19);
+        }
+
+        .note__editing {
+            display: block;
+            z-index: 105;
+        }
+    }
 
     label {
         display: block;
@@ -26,10 +43,38 @@
 
     &__del {
         position: absolute;
-        top:5px;
-        right:5px;
+        top: 5px;
+        right: 5px;
         display: none;
-        color: rgba(0,0,0,0.6);
-        cursor: pointer;  
+        cursor: pointer;
+        color: darkred;
+        font-size: 20px;
+        font-weight: bold;  
+    }
+
+    &__edit {
+        position: absolute;
+        top: 7px;
+        right: 40px; 
+        display: none;
+        font-size: 18px;
+        color: lightblue;
+    }
+
+    &__editing {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 100%;
+        height: 100%;
+        padding: 0 20px 0 30px;
+        font-size: 16px;
+        font-family: Tahoma, sans-serif;
+
+        &:focus {
+            outline: 1px solid red;
+        }
+
     }
 }
