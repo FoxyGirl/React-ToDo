@@ -41,7 +41,7 @@ class Note extends React.Component {
 
     render() {
         const noteClass = `${this.props.isDone ? 'note note--done' : 'note'} 
-        ${this.state.isEdit && 'note--edit'}`;
+        ${this.state.isEdit ? 'note--edit' : ''}`;
 
         return (
           <li className={noteClass}>

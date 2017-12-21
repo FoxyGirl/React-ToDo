@@ -29,14 +29,12 @@ export default class TodoApp extends React.Component {
         this.handleNoteChange = this.handleNoteChange.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const localNotes = JSON.parse(localStorage.getItem('toDoNotes'));
 
         if (localNotes) {
-        this.setState({notes: localNotes, displayedNotes: localNotes});
+            this.setState({notes: localNotes, displayedNotes: localNotes});
         }
-
-        console.log('displayedNotes.length = ' + this.state.displayedNotes.length);
     }
 
     componentDidUpdate() {
