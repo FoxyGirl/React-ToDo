@@ -9,6 +9,7 @@ class NoteEditor extends React.Component {
         this.state = { text: '' };
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handleNoteAdd = this.handleNoteAdd.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
     }
 
     handleTextChange(e) {
@@ -32,6 +33,19 @@ class NoteEditor extends React.Component {
         this.setState({ text: '' });
     }
 
+    handleKeyDown(e) {
+        console.log('handleKeyDown !');
+        if (e.keyCode === 27) {
+            console.log('Escape !');
+            this.setState({ text: '' });
+            return;
+        }
+
+        if (e.keyCode == 13) {
+            this.handleNoteAdd();
+        }
+    }
+
     render() {
         return (
             <div className="note-editor">
@@ -41,6 +55,7 @@ class NoteEditor extends React.Component {
                     className="textarea"
                     value={this.state.text}
                     onChange={this.handleTextChange}
+                    onKeyDown={this.handleKeyDown}
                 />
                 <button 
                     className="add-button" 
