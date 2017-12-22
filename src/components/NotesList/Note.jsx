@@ -10,7 +10,8 @@ class Note extends React.Component {
 
         this.handleEdit = this.handleEdit.bind(this);
         this.handleEditNode = this.handleEditNode.bind(this);
-        this.handleNoteChanget = this.handleNoteChanget.bind(this);        
+        this.handleNoteChanged = this.handleNoteChanged.bind(this);        
+        this.handleKeyDown = this.handleKeyDown.bind(this);        
     }
 
     handleEdit() {
@@ -28,7 +29,7 @@ class Note extends React.Component {
         this.setState({ editText: e.target.value });
     }
 
-    handleNoteChanget(e) {       
+    handleNoteChanged(e) {       
 
         const newIsEdit = !this.state.isEdit;
         this.setState({ isEdit: newIsEdit });
@@ -37,6 +38,23 @@ class Note extends React.Component {
         const newText = e.target.value;
 
         this.props.onNoteChange(noteId, newText);
+    }
+
+    handleKeyDown(e) {
+        const inputEdit = e.target;
+
+        if (e.keyCode === 27) {
+            this.setState((prevState, props) => {
+                return {editText: props.children};
+            });
+
+            setTimeout(() =>  inputEdit.blur(), 0);
+            return;
+        }
+
+        if (e.keyCode == 13) {           
+            setTimeout(() =>  inputEdit.blur(), 0);
+        }
     }
 
     render() {
@@ -57,7 +75,8 @@ class Note extends React.Component {
                 type="text"                 
                 value={this.state.editText}
                 onChange={this.handleEditNode}
-                onBlur={this.handleNoteChanget}
+                onBlur={this.handleNoteChanged}
+                onKeyDown={this.handleKeyDown}
                 />
               <span className="note__del"
                     onClick={this.props.onDelete}>×</span>

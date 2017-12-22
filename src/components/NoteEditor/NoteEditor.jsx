@@ -17,7 +17,7 @@ class NoteEditor extends React.Component {
     }
 
     handleNoteAdd() {
-        if (this.state.text === '') {
+        if (this.state.text.trim() === '') {
             return;
         }
 
@@ -27,16 +27,12 @@ class NoteEditor extends React.Component {
             id: Date.now()
         }
 
-        console.log('newNote = ' + newNote.text);
-
         this.props.onNoteAdd(newNote);
         this.setState({ text: '' });
     }
 
     handleKeyDown(e) {
-        console.log('handleKeyDown !');
         if (e.keyCode === 27) {
-            console.log('Escape !');
             this.setState({ text: '' });
             return;
         }
