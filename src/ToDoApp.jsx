@@ -44,7 +44,11 @@ export default class TodoApp extends React.Component {
     handleNoteAdd(newNote) {
         const newNotes = this.state.notes.slice();
         newNotes.unshift(newNote);
-        this.setState({ notes: newNotes, displayedNotes: newNotes});
+        const newFilters = this.state.filters.slice();
+        this.setState({ notes: newNotes, displayedNotes: newNotes}, () => {
+            const curFilter = newFilters.filter(item => item.isActive === true);
+            this.handleNoteFilter(curFilter[0].name);
+        });
     }
 
     handleNoteDelete(note) {
@@ -55,9 +59,6 @@ export default class TodoApp extends React.Component {
     }
 
     handleNoteChange(note, noteId, newText) {
-      /* console.log(`handleNoteChange text = ${newText}
-       noteId = ${JSON.stringify(noteId)}`); */
-
         const changedNotes = this.state.notes.slice();
         changedNotes.map( note => {
             if ( note.id === noteId ) {
