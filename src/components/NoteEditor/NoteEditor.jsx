@@ -18,6 +18,7 @@ class NoteEditor extends React.Component {
 
     handleNoteAdd() {
         if (this.state.text.trim() === '') {
+            this.setState({ text: '' });
             return;
         }
 
@@ -42,13 +43,19 @@ class NoteEditor extends React.Component {
         }
     }
 
+    componentDidMount() {
+        const inputEdit = ReactDOM.findDOMNode(this.refs.textarea);
+        
+        setTimeout(() =>  inputEdit.focus(), 0);
+    }
+
     render() {
         return (
             <div className="note-editor">
-                <textarea
+                <input type="text"
                     placeholder="Enter your new task here..."
-                    rows={2}
-                    className="textarea"
+                    className="note-editor__textarea"
+                    ref="textarea"
                     value={this.state.text}
                     onChange={this.handleTextChange}
                     onKeyDown={this.handleKeyDown}
