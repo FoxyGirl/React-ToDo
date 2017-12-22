@@ -45,24 +45,24 @@ class Note extends React.Component {
 
         return (
           <li className={noteClass}>
-              <span className="note__del"
-                    onClick={this.props.onDelete}>×</span>
-              <span className="note__edit" ref="edit"
-                    onClick={this.handleEdit}>edit</span>
-              <label>
-                <input  type="checkbox" 
-                        checked={this.props.isDone}
-                        onChange={this.props.onDone} />
-                {this.props.children}
-              </label>
+              <input  type="checkbox" 
+                    id={this.props.noteId}
+                    checked={this.props.isDone}
+                    onChange={this.props.onDone} />      
+              <label className="note__label" 
+                    htmlFor={this.props.noteId}>{this.props.children}</label>
               <input 
                 className="note__editing" 
                 ref="editing" 
-                type="text" 
+                type="text"                 
                 value={this.state.editText}
                 onChange={this.handleEditNode}
                 onBlur={this.handleNoteChanget}
                 />
+              <span className="note__del"
+                    onClick={this.props.onDelete}>×</span>
+              { this.props.isDone  || <span className="note__edit" ref="edit"
+                    onClick={this.handleEdit}>edit</span>}
           </li>
         );
     }

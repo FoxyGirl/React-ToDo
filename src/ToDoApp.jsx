@@ -126,28 +126,26 @@ export default class TodoApp extends React.Component {
             <div className="notes-app">
                 <h2 className="app-header">ToDoApp</h2>
                 <NoteEditor onNoteAdd={this.handleNoteAdd}/>
-
-                { this.state.displayedNotes.length > 0 ? (
-                    <div>
-                        <ProgressBar  
+                 { this.state.notes.length > 0 
+                    && <ProgressBar  
                             itemsCount={this.state.notes.length} 
-                            itemsDoneCount={doneItems.length}/>
-                        <NotesList 
-                            notes={this.state.displayedNotes}
-                            onNoteDelete={this.handleNoteDelete} 
-                            onNoteChange={this.handleNoteChange}
-                            onNoteDone={this.hadleNoteDone} />
-                        <footer className="app-footer"> 
-                            <FilterList 
-                                filters={this.state.filters}
-                                onNoteFilter={this.handleNoteFilter} />
-                                { doneItems.length > 0 
-                                    && <Cleaner onDoneClean={this.hadleDoneClean}/> }   
-                        </footer>                         
-                    </div>
+                            itemsDoneCount={doneItems.length}/>}
+                { this.state.displayedNotes.length > 0 ? (                        
+                    <NotesList 
+                        notes={this.state.displayedNotes}
+                        onNoteDelete={this.handleNoteDelete} 
+                        onNoteChange={this.handleNoteChange}
+                        onNoteDone={this.hadleNoteDone} />                         
                 ) : (
                     <div className="not-found">Nothing is here!</div>
-                )}     
+                )}
+                <footer className="app-footer"> 
+                    <FilterList 
+                        filters={this.state.filters}
+                        onNoteFilter={this.handleNoteFilter} />
+                        { doneItems.length > 0 
+                            && <Cleaner onDoneClean={this.hadleDoneClean}/> }   
+                </footer>     
             </div>
         );
     }

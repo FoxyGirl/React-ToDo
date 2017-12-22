@@ -8,7 +8,8 @@
 
         .note__del,
         .note__edit {
-            display: block;            
+            display: block;
+            cursor: pointer;            
         }
     }
 
@@ -36,9 +37,36 @@
         }
     }
 
-    label {
+    &__label {
         display: block;
-        padding: 10px;
+        position: relative;
+        padding: 10px 90px 10px 40px;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 9px;
+            left: 9px;
+            z-index: 1;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #5a5a5a;
+            transition: all 0.2s ease-in-out;
+        }        
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    input[type="checkbox"]:checked ~ .note__label::before {
+        width: 21px;
+        height: 10px;
+        border-color: green;
+        border-top-style: none;
+        border-right-style: none;
+        transform: rotate(-45deg);
     }
 
     &__del {
