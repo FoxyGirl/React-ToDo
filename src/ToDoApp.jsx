@@ -82,7 +82,11 @@ export default class TodoApp extends React.Component {
     hadleDoneClean() {
         const newNotes = this.state.notes.slice();
         const notesNotDone = newNotes.filter(note => note.isDone === false);
-        this.setState({ notes: notesNotDone, displayedNotes: notesNotDone });
+        this.setState({ notes: notesNotDone, displayedNotes: notesNotDone }, 
+        () => {
+            this.handleNoteFilter('all');
+        });
+        
     }
 
     handleNoteFilter(filter) {
