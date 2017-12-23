@@ -64,13 +64,17 @@ export default class TodoApp extends React.Component {
 
     handleNoteChange(note, noteId, newText) {
         const changedNotes = this.state.notes.slice();
+        const newFilters = this.state.filters.slice();
         changedNotes.map( note => {
             if ( note.id === noteId ) {
                 note.text = newText;
             }
         })
 
-        this.setState({notes: changedNotes, displayedNotes: changedNotes});
+        this.setState({notes: changedNotes, displayedNotes: changedNotes}, () => {
+            const curFilter = newFilters.filter(item => item.isActive === true);
+            this.handleNoteFilter(curFilter[0].name);                        
+        });
     }
 
     hadleNoteDone(note) {
