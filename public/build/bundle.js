@@ -19877,19 +19877,27 @@
 	    }, {
 	        key: 'handleNoteChange',
 	        value: function handleNoteChange(note, noteId, newText) {
+	            var _this2 = this;
+
 	            var changedNotes = this.state.notes.slice();
+	            var newFilters = this.state.filters.slice();
 	            changedNotes.map(function (note) {
 	                if (note.id === noteId) {
 	                    note.text = newText;
 	                }
 	            });
 
-	            this.setState({ notes: changedNotes, displayedNotes: changedNotes });
+	            this.setState({ notes: changedNotes, displayedNotes: changedNotes }, function () {
+	                var curFilter = newFilters.filter(function (item) {
+	                    return item.isActive === true;
+	                });
+	                _this2.handleNoteFilter(curFilter[0].name);
+	            });
 	        }
 	    }, {
 	        key: 'hadleNoteDone',
 	        value: function hadleNoteDone(note) {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            var noteId = note.id;
 	            var newNotes = this.state.notes.slice();
@@ -19904,23 +19912,23 @@
 	                    return item.isActive === true;
 	                });
 	                if (curFilter[0].name === 'new') {
-	                    _this2.handleNoteFilter('new');
+	                    _this3.handleNoteFilter('new');
 	                } else {
-	                    _this2.handleNoteFilter(curFilter[0].name);
+	                    _this3.handleNoteFilter(curFilter[0].name);
 	                }
 	            });
 	        }
 	    }, {
 	        key: 'hadleDoneClean',
 	        value: function hadleDoneClean() {
-	            var _this3 = this;
+	            var _this4 = this;
 
 	            var newNotes = this.state.notes.slice();
 	            var notesNotDone = newNotes.filter(function (note) {
 	                return note.isDone === false;
 	            });
 	            this.setState({ notes: notesNotDone, displayedNotes: notesNotDone }, function () {
-	                _this3.handleNoteFilter('all');
+	                _this4.handleNoteFilter('all');
 	            });
 	        }
 	    }, {
@@ -20914,7 +20922,7 @@
 
 
 	// module
-	exports.push([module.id, ".note {\n  position: relative;\n  margin-bottom: 15px;\n  background-color: #fff;\n}\n.note:hover {\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n}\n.note:hover .note__del,\n.note:hover .note__edit {\n  display: block;\n  cursor: pointer;\n}\n.note.note--done {\n  text-decoration: line-through;\n}\n.note.note--edit::after {\n  content: '';\n  display: block;\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  z-index: 100;\n  background-color: rgba(0, 0, 0, 0.19);\n}\n.note.note--edit .note__editing {\n  display: block;\n  z-index: 105;\n}\n.note__label {\n  display: block;\n  position: relative;\n  min-height: 40px;\n  padding: 10px 90px 10px 40px;\n  cursor: pointer;\n}\n.note__label::before {\n  content: \"\";\n  position: absolute;\n  top: 9px;\n  left: 9px;\n  z-index: 1;\n  width: 16px;\n  height: 16px;\n  border: 2px solid #5a5a5a;\n  transition: all 0.2s ease-in-out;\n}\n.note input[type=\"checkbox\"] {\n  display: none;\n}\n.note input[type=\"checkbox\"]:checked ~ .note__label::before {\n  width: 21px;\n  height: 10px;\n  border-color: green;\n  border-top-style: none;\n  border-right-style: none;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.note__del {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  display: none;\n  cursor: pointer;\n  color: darkred;\n  font-size: 20px;\n  font-weight: bold;\n}\n.note__edit {\n  position: absolute;\n  top: 7px;\n  right: 40px;\n  display: none;\n  font-size: 18px;\n  color: lightblue;\n}\n.note__editing {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: none;\n  width: 100%;\n  height: 100%;\n  padding: 0 20px 0 30px;\n  font-size: 16px;\n  font-family: Tahoma, sans-serif;\n}\n.note__editing:focus {\n  outline: 1px solid red;\n}\n", ""]);
+	exports.push([module.id, ".note {\n  position: relative;\n  margin-bottom: 15px;\n  background-color: #fff;\n}\n.note:hover {\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n}\n.note:hover .note__del,\n.note:hover .note__edit {\n  display: block;\n  cursor: pointer;\n}\n.note.note--done {\n  text-decoration: line-through;\n}\n.note.note--edit::after {\n  content: '';\n  display: block;\n  position: fixed;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  z-index: 100;\n  background-color: rgba(0, 0, 0, 0.19);\n}\n.note.note--edit .note__editing {\n  display: block;\n  z-index: 105;\n}\n.note__label {\n  display: block;\n  position: relative;\n  min-height: 40px;\n  padding: 10px 90px 10px 40px;\n  cursor: pointer;\n}\n.note__label::before {\n  content: \"\";\n  position: absolute;\n  top: 9px;\n  left: 9px;\n  z-index: 1;\n  width: 16px;\n  height: 16px;\n  border: 2px solid #5a5a5a;\n  transition: all 0.2s ease-in-out;\n}\n.note input[type=\"checkbox\"] {\n  display: none;\n}\n.note input[type=\"checkbox\"]:checked ~ .note__label::before {\n  width: 21px;\n  height: 10px;\n  border-color: green;\n  border-top-style: none;\n  border-right-style: none;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg);\n}\n.note__del {\n  position: absolute;\n  top: 0;\n  right: 0;\n  display: none;\n  height: 100%;\n  padding: 5px 10px;\n  cursor: pointer;\n  color: darkred;\n  font-size: 20px;\n  font-weight: bold;\n}\n.note__edit {\n  position: absolute;\n  top: 0;\n  right: 40px;\n  height: 100%;\n  padding: 7px 10px;\n  display: none;\n  font-size: 18px;\n  color: lightblue;\n}\n.note__editing {\n  position: absolute;\n  top: 0;\n  left: 0;\n  display: none;\n  width: 100%;\n  height: 100%;\n  padding: 0 20px 0 30px;\n  font-size: 16px;\n  font-family: Tahoma, sans-serif;\n}\n.note__editing:focus {\n  outline: 1px solid red;\n}\n", ""]);
 
 	// exports
 
