@@ -47,7 +47,11 @@ export default class TodoApp extends React.Component {
         const newFilters = this.state.filters.slice();
         this.setState({ notes: newNotes, displayedNotes: newNotes}, () => {
             const curFilter = newFilters.filter(item => item.isActive === true);
-            this.handleNoteFilter(curFilter[0].name);
+            if (curFilter[0].name === 'done') {
+                this.handleNoteFilter('new');
+            } else {
+                this.handleNoteFilter(curFilter[0].name);
+            }            
         });
     }
 
@@ -77,7 +81,15 @@ export default class TodoApp extends React.Component {
                 note.isDone = !note.isDone;
             }
         });
-        this.setState({notes: newNotes, displayedNotes: newNotes});
+        const newFilters = this.state.filters.slice();
+        this.setState({notes: newNotes, displayedNotes: newNotes}, () => {
+            const curFilter = newFilters.filter(item => item.isActive === true);
+            if (curFilter[0].name === 'new') {
+                this.handleNoteFilter('new');
+            } else {
+                this.handleNoteFilter(curFilter[0].name);
+            }            
+        });
     }
 
     hadleDoneClean() {
@@ -123,7 +135,6 @@ export default class TodoApp extends React.Component {
     }
 
     render()  {
-        console.log('Render displayedNotes.length = ' + this.state.displayedNotes.length);
         const newNotes = this.state.notes.slice();
         const doneItems = newNotes.filter(note => note.isDone);
 

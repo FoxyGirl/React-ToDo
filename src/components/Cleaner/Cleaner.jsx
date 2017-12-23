@@ -4,11 +4,6 @@ import React from 'react';
 import './Cleaner.less';
 
 class Cleaner extends React.Component {
-    constructor(props) {
-        super(props);
-
-      //  this.handleFilter = this.handleFilter.bind(this);
-  }
 
   render() {
       return (
