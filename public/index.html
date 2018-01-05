@@ -24,6 +24,10 @@
             <a class="app-link" href="https://github.com/FoxyGirl/react-to-do-1/tree/master" target="_blank" rel="noopener noreferrer">View on GitHub</a>
         </footer>
         <script type="text/javascript" src="build/bundle.js"></script>
-        
+        <script>
+            if ('ontouchstart' in window) {
+                document.documentElement.classList.add('touch-device');
+            }
+        </script>
     </body>
 </html>
